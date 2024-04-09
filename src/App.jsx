@@ -1,19 +1,20 @@
-
-
-import { Banner } from '../components/Banner'
-import { BestOffers } from '../components/BestOffers'
-import NavBar from '../components/NavBar'
+import { HomePage } from '../components/HomePage'
+import {BrowserRouter,Routes,Route} from "react-router-dom";
 import './App.css'
+import BookingPage from '../components/BookingPage';
+
 
 function App() {
   
 
   return  (
     <div className='App'>
-    
-    <NavBar/>
-    <Banner/>
-    <BestOffers/>
+   <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<HomePage/>}/>
+    <Route path='/booking' element={<BookingPage/>}/>
+   </Routes>
+   </BrowserRouter>
     </div>
   )
 }

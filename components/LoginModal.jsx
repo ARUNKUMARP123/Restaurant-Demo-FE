@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { handleLoginApi, handleRegistrationApi } from '../src/api';
 
+
 export default function LogInModal({
     Modalopen=false,
      setModalOpen=()=>{},
@@ -20,11 +21,16 @@ export default function LogInModal({
     confirmPassword:"",
     phonenumber:"",
     email:"",
-  })
+  });
+
+  const handleuserLogin=(username)=>{
+    localStorage.setItem("username",username);
+   
+  }
 
 
- console.log(formValue)
-  return (
+
+  return ( 
     <React.Fragment>
      
       <Dialog
@@ -34,17 +40,21 @@ export default function LogInModal({
         }}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
+          onSubmit:async (event) => {
             event.preventDefault();
             // const formData = new FormData(event.currentTarget);
             // const formJson = Object.fromEntries(formData.entries());
             // const email = formJson.email;
             // console.log(email);
             if(Type==="login"){
-              handleLoginApi(formValue);
+             const response= await handleLoginApi(formValue);
+             console.log(response.data,"response");
+             if(response.data) handleuserLogin(response.data);
               //alert("login");
             }else{
-              handleRegistrationApi(formValue)
+              const response= await handleRegistrationApi(formValue);
+              console.log(response.data,"response");
+              if(response.data) handleuserLogin(response.data);
               //alert("registration");
             }
             setModalOpen(false);

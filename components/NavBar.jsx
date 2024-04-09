@@ -1,6 +1,7 @@
 import {AppBar,Grid,Toolbar,Button,Autocomplete,TextField} from "@mui/material"
 import { useState } from "react"
 import LogInModal from "../components/LoginModal"
+import {useNavigate} from "react-router-dom";
 
  const NavBar = () => {
 
@@ -11,7 +12,9 @@ import LogInModal from "../components/LoginModal"
     ]
 
     const [Modalopen,setModalOpen]=useState(false);
-    const [Type,setType]=useState("login")
+    const [Type,setType]=useState("login");
+    const username= localStorage.getItem("username");
+    const navigate=useNavigate();
 
   const  handleloginclick=()=>{
     setModalOpen(true),
@@ -21,6 +24,12 @@ import LogInModal from "../components/LoginModal"
   const  handlesignupclick=()=>{
     setModalOpen(true),
     setType("registration")
+  }
+
+
+  const handleLogOut=()=>{
+    localStorage.setItem("username","");
+    window.location.reload();
   }
   return (
     <div>
@@ -47,13 +56,20 @@ import LogInModal from "../components/LoginModal"
 />
                 </Grid>
                 <Grid item>
-                    <Button variant="outlined">home</Button>
-                    <Button variant="outlined">book a table</Button>
+                    <Button variant="outlined" onClick={()=>{navigate("/")}}>home</Button>
+                    <Button variant="outlined" onClick={()=>{navigate("/booking")}}>book a table</Button>
                     <Button variant="outlined">blog</Button>
                 </Grid>
                 <Grid item>
+                    {username?
+                   ( <>
+                   <Button variant="outlined" onClick={handleLogOut}>LogOut</Button>
+                    
+                    </>):
+                    (<>
                     <Button variant="outlined" onClick={handlesignupclick}>Sign Up</Button>
                     <Button variant="outlined" onClick={handleloginclick}>LogIn</Button>
+                    </>)}
                     </Grid>
                 </Grid>
             </Toolbar>
