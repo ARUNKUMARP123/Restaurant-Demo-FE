@@ -23,7 +23,7 @@ export default function LogInModal({
     email:"",
   });
 
-  const handleuserLogin=(username)=>{
+  const handleUserLogin=(username)=>{
     localStorage.setItem("username",username);
    
   }
@@ -49,12 +49,12 @@ export default function LogInModal({
             if(Type==="login"){
              const response= await handleLoginApi(formValue);
              console.log(response.data,"response");
-             if(response.data) handleuserLogin(response.data);
+             if(response.data) handleUserLogin(response.data);
               //alert("login");
             }else{
               const response= await handleRegistrationApi(formValue);
               console.log(response.data,"response");
-              if(response.data) handleuserLogin(response.data);
+              if(response.data) handleUserLogin(response.data);
               //alert("registration");
             }
             setModalOpen(false);

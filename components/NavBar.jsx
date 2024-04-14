@@ -2,14 +2,10 @@ import {AppBar,Grid,Toolbar,Button,Autocomplete,TextField} from "@mui/material"
 import { useState } from "react"
 import LogInModal from "../components/LoginModal"
 import {useNavigate} from "react-router-dom";
+import {LOCATION} from "../src/Utils"
 
  const NavBar = () => {
 
-    const LOCATION=[
-        {label:"Chennai",id:1001},
-        {label:"Mumbai",id:1002},
-        {label:"Delhi",id:1003}
-    ]
 
     const [Modalopen,setModalOpen]=useState(false);
     const [Type,setType]=useState("login");
