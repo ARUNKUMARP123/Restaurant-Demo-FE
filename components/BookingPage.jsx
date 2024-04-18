@@ -13,7 +13,7 @@ import { useState } from "react";
 const BookingPage = () => {
 
   const [checkedFilter,setCheckedFilter]=useState([]);  
-  const [sort,setSort]=useState([]);  
+  const [sort,setSort]=useState(["Rating"]);  
 
   const {location}=useParams();
   //console.log(location,"location");
