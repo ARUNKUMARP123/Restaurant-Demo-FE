@@ -73,8 +73,8 @@ export default function BasicTable({BookingHistory,setSnackBar,handleClose}) {
     }
     return (
       <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer style={{overflow:''}} component={Paper}>
+        <Table sx={{ minWidth: 650,}} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Restaurant Name</TableCell>

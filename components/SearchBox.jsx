@@ -23,7 +23,7 @@ export const SearchBox = () => {
           ),
           endAdornment:(
             <InputAdornment position= "end">
-            <Button>Search</Button>     
+            <Button color="success" variant="text">Search</Button>     
             </InputAdornment>
           )
         }}

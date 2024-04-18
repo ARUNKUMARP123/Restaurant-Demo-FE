@@ -164,8 +164,8 @@ export default function LogInModal({
         </>)} 
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>{ setModalOpen(false);   }}>Cancel</Button>
-          <Button type="submit">{Type==="login"?"LogIn":"Registration"}</Button>
+          <Button  color="error" variant="contained"  onClick={()=>{ setModalOpen(false);   }}>Cancel</Button>
+          <Button   color="success" variant="contained" type="submit">{Type==="login"?"LogIn":"Registration"}</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
