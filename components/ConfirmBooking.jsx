@@ -36,6 +36,7 @@ const defaultState={
 export default function ConfirmBooking({BookingModal,handleClose,restaurantId,setSnackBar}) {
 const [FormValue,setFormValue]=useState(defaultState);
 const [bookedslots,setbookedslots]=useState([]);
+
 const username=localStorage.getItem("username");
 
 
@@ -86,21 +87,32 @@ useEffect(()=>{
         username,
         ...FormValue,
       })
-     const response=await  handleCreateBookingApi({
-        username,
-        ...FormValue,
-     })
-     if(response.data){
-      setSnackBar({
-        type:"success",
-        message:"Booking Created Successfully.",
-        openSnackbar:true,
-      })
-      setFormValue(defaultState);
-      setbookedslots([]);
-      handleClose();
-     }
-     console.log(response,"response");
+
+
+      if(username?.length){
+        const response=await  handleCreateBookingApi({
+          username,
+          ...FormValue,
+       })
+       if(response.data){
+        setSnackBar({
+          type:"success",
+          message:"Booking Created Successfully.",
+          openSnackbar:true,
+        })
+        setFormValue(defaultState);
+        setbookedslots([]);
+        handleClose();
+       }
+       console.log(response,"response");
+      }else{
+        setSnackBar({
+          type:"warning",
+          message:"Login To Book !!!",
+          openSnackbar:true,
+        })
+      }
+    
     };
  
     
