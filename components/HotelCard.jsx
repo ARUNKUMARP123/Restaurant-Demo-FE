@@ -4,7 +4,7 @@ import { useState } from "react"
 import ConfirmBooking from "./ConfirmBooking";
 
 
-export const HotelCard = () => {
+export const HotelCard = ({searchedLocation,setSnackBar,handleClose,snackBarState}) => {
 
 
     const [BookingModal,setBookingModal]=useState("");
@@ -16,7 +16,7 @@ export const HotelCard = () => {
   return (
 <>
 <Grid container lg={12} rowGap={2} >
- { restaurant.chennai.map((d,index)=>{
+ { restaurant[searchedLocation].map((d,index)=>{
     return (
     
         <Grid container  key={`${index}-${d.id}`} lg={4} padding={1}  onClick={()=>{setBookingModal(d.id)}}>
@@ -56,7 +56,7 @@ export const HotelCard = () => {
     )
  }) }
  </Grid>
- <ConfirmBooking restaurantId={BookingModal} BookingModal={Boolean(BookingModal)} handleClose={()=>{setBookingModal(false)}}/>
+ <ConfirmBooking setSnackBar={setSnackBar} restaurantId={BookingModal} BookingModal={Boolean(BookingModal)} handleClose={()=>{setBookingModal(false)}}/>
 
 </>
 

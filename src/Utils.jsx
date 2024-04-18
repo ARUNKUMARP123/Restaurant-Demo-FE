@@ -84,6 +84,8 @@ export const LOCATION=[
 ];
 
 
+export const SUPPORTED_LOCATION=['chennai','mumbai','delhi']
+
 export const restaurant = {
     delhi: [
       {

@@ -1,11 +1,11 @@
 import {Grid,Typography,FormControl,Select,MenuItem} from "@mui/material"
 import { SORT } from "../src/Utils"
 
-export const InfoBox = () => {
+export const InfoBox = ({searchedLocation}) => {
   return (
     <Grid  container justifyContent={"space-between"} alignItems={"center"}>
         <Grid item>
-           < Typography variant="h5">Best Restaurants Near Me in</Typography>
+           < Typography variant="h5">Best Restaurants Near Me in {searchedLocation}</Typography>
         </Grid>
         <Grid item >
             <Grid container justifyContent={"center"} alignItems={"center"} >

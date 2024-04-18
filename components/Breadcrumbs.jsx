@@ -1,10 +1,10 @@
 import {Breadcrumbs,Link,Typography} from "@mui/material"
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-export const GeoBreadcrumbs = () => {
+export const GeoBreadcrumbs = ({searchedLocation}) => {
 
     const breadcrumbs = [
         <Link underline="hover" key="1" color="inherit" href="/" onClick={()=>{}}>
-          MUI
+          Dine out
         </Link>,
         <Link
           underline="hover"
@@ -13,10 +13,10 @@ export const GeoBreadcrumbs = () => {
           href="/material-ui/getting-started/installation/"
           onClick={()=>{}}
         >
-          Core
+          {searchedLocation}
         </Link>,
         <Typography key="3" color="text.primary">
-          Breadcrumb
+          {searchedLocation}
         </Typography>,
       ];
     

@@ -5,12 +5,22 @@ import Filter from "./Filter";
 import { GeoBreadcrumbs } from "./Breadcrumbs";
 import { InfoBox } from "./InfoBox";
 import { HotelCard } from "./HotelCard";
-
+import { useParams } from "react-router-dom";
+import {SUPPORTED_LOCATION} from "../src/Utils"
+import { SnackBarConsumer } from "./Context";
 
 const BookingPage = () => {
+
+  const {location}=useParams();
+  console.log(location,"location");
+ const searchedLocation =SUPPORTED_LOCATION.includes(location?.toLowerCase())?location:SUPPORTED_LOCATION?.[0]
     return (
-      <div>
-        <NavBar></NavBar>
+      <SnackBarConsumer>
+     
+     {({setSnackBar,snackBarState})=>{
+      return (
+        <>
+         <NavBar pageType={2}></NavBar>
         <BookingHeader></BookingHeader>
         <Grid container
         style={{
@@ -23,13 +33,18 @@ const BookingPage = () => {
           <Filter/>
         </Grid>
         <Grid item lg={9}>
-          <GeoBreadcrumbs/>
-          <InfoBox/>
-          <HotelCard/>
+          <GeoBreadcrumbs searchedLocation={searchedLocation}/>
+          <InfoBox searchedLocation={searchedLocation}/>
+          <HotelCard searchedLocation={searchedLocation} setSnackBar={setSnackBar} snackBarState={snackBarState}/>
         </Grid>
 
         </Grid>
-      </div>
+        </>
+
+      )
+     }}
+     </SnackBarConsumer>
+      
     )
   }
   

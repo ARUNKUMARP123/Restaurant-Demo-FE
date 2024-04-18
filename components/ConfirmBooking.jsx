@@ -33,7 +33,7 @@ const defaultState={
 };
 
 
-export default function ConfirmBooking({BookingModal,handleClose,restaurantId}) {
+export default function ConfirmBooking({BookingModal,handleClose,restaurantId,setSnackBar}) {
 const [FormValue,setFormValue]=useState(defaultState);
 const [bookedslots,setbookedslots]=useState([]);
 const username=localStorage.getItem("username");
@@ -91,6 +91,11 @@ useEffect(()=>{
         ...FormValue,
      })
      if(response.data){
+      setSnackBar({
+        type:"success",
+        message:"Booking Created Successfully.",
+        openSnackbar:true,
+      })
       setFormValue(defaultState);
       setbookedslots([]);
       handleClose();

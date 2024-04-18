@@ -3,12 +3,23 @@ import { useState } from "react"
 import LogInModal from "../components/LoginModal"
 import {useNavigate} from "react-router-dom";
 import {LOCATION} from "../src/Utils"
+import { SearchBox } from "./SearchBox";
+import { BookedModal } from "./BookedModal";
+import SnackBar from "./SnackBar";
 
- const NavBar = () => {
+
+ const NavBar = ({pageType=1,setSnackBar,snackBarState}) => {
+  
 
 
     const [Modalopen,setModalOpen]=useState(false);
+    const [bookedModalopen,setbookedModalOpen]=useState(false);
     const [Type,setType]=useState("login");
+
+    
+ 
+
+
     const username= localStorage.getItem("username");
     const navigate=useNavigate();
 
@@ -27,6 +38,10 @@ import {LOCATION} from "../src/Utils"
     localStorage.setItem("username","");
     window.location.reload();
   }
+
+  const handleBookedTable=()=>{
+    setbookedModalOpen(true);
+  };
   return (
     <div>
         <AppBar color="transparent" position="static">
@@ -44,18 +59,22 @@ import {LOCATION} from "../src/Utils"
                 </Grid>
                 <Grid item>
                 <Autocomplete
-  disablePortal
-  id="combo-box-demo"
-  options={LOCATION}
-  sx={{ width: 300 }}
-  renderInput={(params) => <TextField {...params} label="LOCATION" />}
+                  onChange={e=>{
+                    navigate("/booking/"+e.target.innerText.toLowerCase())
+                  }}
+                  disablePortal
+                  id="combo-box-demo"
+                  options={LOCATION}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="LOCATION" />}
 />
                 </Grid>
                 <Grid item>
-                    <Button variant="outlined" onClick={()=>{navigate("/")}}>home</Button>
+                    {pageType==1?<>
+                   {username?.length && ( <Button variant="outlined" onClick={handleBookedTable}>Booked History</Button>)}
                     <Button variant="outlined" onClick={()=>{navigate("/booking")}}>book a table</Button>
-                    <Button variant="outlined">blog</Button>
-                </Grid>
+                    </>:<SearchBox/>}
+                </Grid> 
                 <Grid item>
                     {username?
                    ( <>
@@ -72,6 +91,9 @@ import {LOCATION} from "../src/Utils"
         </AppBar>
 
         <LogInModal Type={Type} Modalopen={Modalopen}  setModalOpen={setModalOpen}/>
+        <BookedModal setSnackBar={setSnackBar} bookedModalopen={bookedModalopen} handleClose={()=> setbookedModalOpen(false)} username={username}/>
+        {/* <SnackBar {...snackBarState} setOpenSnackbar={()=>setSnackBar({...snackBarState,openSnackbar:false})}/> */}
+
     </div>  
   )
 }

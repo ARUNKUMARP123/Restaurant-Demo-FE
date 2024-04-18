@@ -8,7 +8,7 @@ export const SearchBox = () => {
       
         <TextField
         fullWidth={true}
-        style={{boxShadow:" rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px"}}
+        style={{boxShadow:" rgba(0, 0, 0, 0.2) 0px 0px 0px 0px, rgba(0, 0, 0, 0.14) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 2px 0px 0px"}}
         id="input-with-icon-textfield"
        // label="Search Anything"   
         className={styles.banner_search}

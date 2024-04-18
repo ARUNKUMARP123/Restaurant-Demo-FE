@@ -51,3 +51,18 @@ username="",
     });
 
   };
+
+  export const fetchBookingForUserApi= ({
+  username
+  })=>{
+    return axios.get("http://localhost:4000/fetchBookingForUser/"+username);
+
+  };
+
+
+  export const makeCancelRequestApi= ({
+    bookingId
+    })=>{
+      return axios.get("http://localhost:4000/cancel-booking/"+bookingId);
+  
+    };
