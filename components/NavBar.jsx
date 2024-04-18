@@ -71,7 +71,7 @@ import SnackBar from "./SnackBar";
                 </Grid>
                 <Grid item>
                     {pageType==1?<>
-                   {username?.length && ( <Button   color="success" variant="contained"  onClick={handleBookedTable}>Booked History</Button>)}
+                   {username && ( <Button   color="success" variant="contained"  onClick={handleBookedTable}>Booked History</Button>)}
                     <Button style={{marginLeft:20}} color="success" variant="contained" onClick={()=>{navigate("/booking")}}>book a table</Button>
                     </>:<SearchBox/>}
                 </Grid> 
