@@ -4,19 +4,50 @@ import { useState } from "react"
 import ConfirmBooking from "./ConfirmBooking";
 
 
-export const HotelCard = ({searchedLocation,setSnackBar,handleClose,snackBarState}) => {
+export const HotelCard = ({searchedLocation,setSnackBar,handleClose,snackBarState,checkedFilter,sort }) => {
 
-
+console.log(sort)
     const [BookingModal,setBookingModal]=useState("");
 
+    let RestaurantData= restaurant[searchedLocation];
+
+    if(checkedFilter?.length){
+        RestaurantData=RestaurantData.filter(eachRestaurantData=>{
+
+            let matchFound=true;
+
+            eachRestaurantData.tags.forEach(tag=>{
+                if(checkedFilter.includes(tag)){
+                    matchFound=false;
+                }
+            })
+            return !matchFound;
+        })
+    }
 
 
+    const Callback=(one,two,type,reverse)=>{
+const firstRating=Number(one[type]);
+const secondRating=Number(two[type]);
+
+if(firstRating>secondRating)return reverse?-1:1;
+if(firstRating<secondRating)return reverse?1:-1;
+    }
+
+
+if(sort==="Rating"){
+RestaurantData=RestaurantData.sort((a,b)=>Callback(a,b,"ratings"))
+}else if(sort==="Price High to Low"){
+    RestaurantData=RestaurantData.sort((a,b)=>Callback(a,b,"price",true))
+}else if(sort==="Price Low to High"){
+    RestaurantData=RestaurantData.sort((a,b)=>Callback(a,b,"price"))
+}
 
 
   return (
 <>
 <Grid container lg={12} rowGap={2} >
- { restaurant[searchedLocation].map((d,index)=>{
+ {RestaurantData.map((d,index)=>{
     return (
     
         <Grid container  key={`${index}-${d.id}`} lg={4} padding={1}  onClick={()=>{setBookingModal(d.id)}}>

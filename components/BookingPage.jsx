@@ -8,11 +8,15 @@ import { HotelCard } from "./HotelCard";
 import { useParams } from "react-router-dom";
 import {SUPPORTED_LOCATION} from "../src/Utils"
 import { SnackBarConsumer } from "./Context";
+import { useState } from "react";
 
 const BookingPage = () => {
 
+  const [checkedFilter,setCheckedFilter]=useState([]);  
+  const [sort,setSort]=useState([]);  
+
   const {location}=useParams();
-  console.log(location,"location");
+  //console.log(location,"location");
  const searchedLocation =SUPPORTED_LOCATION.includes(location?.toLowerCase())?location:SUPPORTED_LOCATION?.[0]
     return (
       <SnackBarConsumer>
@@ -30,12 +34,12 @@ const BookingPage = () => {
        spacing={4}
        >
         <Grid item lg={3}>
-          <Filter/>
+          <Filter checkedFilter={checkedFilter} setCheckedFilter={setCheckedFilter}/>
         </Grid>
         <Grid item lg={9}>
           <GeoBreadcrumbs searchedLocation={searchedLocation}/>
-          <InfoBox searchedLocation={searchedLocation}/>
-          <HotelCard searchedLocation={searchedLocation} setSnackBar={setSnackBar} snackBarState={snackBarState}/>
+          <InfoBox searchedLocation={searchedLocation} setSort={setSort} sort={sort}/>
+          <HotelCard sort={sort} checkedFilter={checkedFilter} searchedLocation={searchedLocation} setSnackBar={setSnackBar} snackBarState={snackBarState}/>
         </Grid>
 
         </Grid>

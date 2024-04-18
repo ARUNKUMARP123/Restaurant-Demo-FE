@@ -1,7 +1,7 @@
 import {Grid,Typography,FormControl,Select,MenuItem} from "@mui/material"
 import { SORT } from "../src/Utils"
 
-export const InfoBox = ({searchedLocation}) => {
+export const InfoBox = ({searchedLocation,sort,setSort}) => {
   return (
     <Grid  container justifyContent={"space-between"} alignItems={"center"}>
         <Grid item>
@@ -16,8 +16,13 @@ export const InfoBox = ({searchedLocation}) => {
        style={{width:196}}
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={SORT[0]}    
-          onChange={()=>{}}
+          value={sort} 
+          label={sort}   
+          name={sort}
+          onChange={(event)=>{
+            setSort(event.target.value);
+
+          }}
         >
           {SORT.map((e,index)=>{
             return (
