@@ -5,7 +5,7 @@ const localApi="http://localhost:4000";
 
 const proApi="https://restaurant-demo-node-9oqh.onrender.com";
 
-const apiUrl=import.meta.env.REACT_API_ENV==='production'? proApi:localApi;
+const apiUrl=import.meta.env.REACT_APP_ENV==='production'? proApi:localApi;
 
 export const handleLoginApi = ({
     username="",
