@@ -7,7 +7,17 @@ import { QuickFilter,CuisniesFilter,TagsFilter } from "../src/Utils";
 
 
 
-export default function Filter() {
+export default function Filter({checkedFilter=[],setCheckedFilter}) {
+console.log(checkedFilter)
+  const handleFilter=(event)=>{
+    
+    if(event.target.checked){
+      setCheckedFilter([...checkedFilter,event.target.value,]);
+    }else{
+      const filters=checkedFilter.filter((ele)=>event.target.value!==ele);
+      setCheckedFilter(filters);
+    }
+  }
   return (
     <div>
       <Accordion>
@@ -21,7 +31,7 @@ export default function Filter() {
         <AccordionDetails>
         <FormGroup>
         {QuickFilter.map((label,index)=>{
-            return (<FormControlLabel key={index} control={<Checkbox  />} label={label} />)            
+            return (<FormControlLabel onChange={handleFilter} key={index} control={<Checkbox  />} label={label} name={label} value={label} />)            
         })}
         </FormGroup>
         </AccordionDetails>
@@ -37,7 +47,7 @@ export default function Filter() {
         <AccordionDetails>
         <FormGroup>
         {CuisniesFilter.map((label,index)=>{
-            return (<FormControlLabel key={index} control={<Checkbox  />} label={label} />)            
+            return (<FormControlLabel onChange={handleFilter} key={index} control={<Checkbox  />} label={label} name={label} value={label} />)            
         })}
         </FormGroup>
         </AccordionDetails>
@@ -53,7 +63,7 @@ export default function Filter() {
         <AccordionDetails>
         <FormGroup>
         {TagsFilter.map((label,index)=>{
-            return (<FormControlLabel key={index} control={<Checkbox  />} label={label} />)            
+            return (<FormControlLabel onChange={handleFilter} key={index} control={<Checkbox  />} label={label} name={label} value={label} />)            
         })}
         </FormGroup>
         </AccordionDetails>

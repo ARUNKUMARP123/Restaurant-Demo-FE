@@ -1,11 +1,16 @@
 import axios from "axios";
 
 
+
+const localApi="http://localhost:4000"
+const proApi="https://restaurant-demo-node-9oqh.onrender.com"
+const apiUrl=process.env.REACT_API_ENV==='production'? proApi:localApi;
+
 export const handleLoginApi = ({
     username="",
     password="",
 }) => { 
-  return axios.post("http://localhost:4000/login",{
+  return axios.post("/login",{
     username,
     password,
   })
@@ -16,7 +21,7 @@ export const handleRegistrationApi = ({
     phonenumber="",
     email="",
 }) => { 
-    return axios.post("http://localhost:4000/registration",{
+    return axios.post(apiUrl+"/registration",{
         username,
         password,
         phonenumber,
@@ -31,7 +36,7 @@ selectedSeat=0,
 selectedTime="",
 username="",
 }) => { 
-    return axios.post("http://localhost:4000/createbooking",{
+    return axios.post(apiUrl+"/createbooking",{
       restaurantId,
       selectedDate,
       selectedSeat,
@@ -45,7 +50,7 @@ username="",
     restaurantId="",
     selectedDate="",
   })=>{
-    return axios.post("http://localhost:4000/restaurant-slot",{
+    return axios.post(apiUrl+"/restaurant-slot",{
       restaurantId,
       selectedDate,
     });
@@ -55,7 +60,7 @@ username="",
   export const fetchBookingForUserApi= ({
   username
   })=>{
-    return axios.get("http://localhost:4000/fetchBookingForUser/"+username);
+    return axios.get(apiUrl+"/fetchBookingForUser/"+username);
 
   };
 
@@ -63,6 +68,6 @@ username="",
   export const makeCancelRequestApi= ({
     bookingId
     })=>{
-      return axios.get("http://localhost:4000/cancel-booking/"+bookingId);
+      return axios.get(apiUrl+"/cancel-booking/"+bookingId);
   
     };
