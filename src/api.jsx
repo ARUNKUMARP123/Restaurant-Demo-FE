@@ -1,16 +1,17 @@
 import axios from "axios";
 
 
+const localApi="http://localhost:4000";
 
-const localApi="http://localhost:4000"
-const proApi="https://restaurant-demo-node-9oqh.onrender.com"
-const apiUrl=process.env.REACT_API_ENV==='production'? proApi:localApi;
+const proApi="https://restaurant-demo-node-9oqh.onrender.com";
+
+const apiUrl=import.meta.env.REACT_API_ENV==='production'? proApi:localApi;
 
 export const handleLoginApi = ({
     username="",
     password="",
 }) => { 
-  return axios.post("/login",{
+  return axios.post(apiUrl+"/login",{
     username,
     password,
   })
